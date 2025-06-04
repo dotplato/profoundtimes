@@ -13,7 +13,7 @@ export default async function TopicsPage({
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
         <h1 className="text-4xl font-bold tracking-tight mb-4">Topics</h1>
-        <p className="text-xl text-muted-foreground">Explore articles by topic and category</p>
+        <p className="text-xl text-muted-foreground">Curated list of all articles based on topics</p>
       </div>
 
       <Suspense fallback={<div>Loading topics...</div>}>

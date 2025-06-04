@@ -8,8 +8,8 @@ export default async function LibraryPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold tracking-tight mb-4">Article Library</h1>
-        <p className="text-xl text-muted-foreground">Browse our complete collection of articles</p>
+        <h1 className="text-4xl font-bold tracking-tight mb-4">Library</h1>
+        <p className="text-xl text-muted-foreground">Authors are writing good stuff here...</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
