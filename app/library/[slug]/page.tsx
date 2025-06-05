@@ -39,8 +39,8 @@ const options = {
       <h2 className="text-2xl font-semibold  mt-6 mb-3">{children}</h2>
     ),
  
-    [BLOCKS.BLOCKQUOTE]: (node: any, children: React.ReactNode) => (
-      <blockquote className="border-l-4 border-muted-300 pl-4 italic text-gray-600 my-6">
+    [BLOCKS.QUOTE]: (node: any, children: React.ReactNode) => (
+      <blockquote className="border-l-4 bg-amber-50 border-foreground-300 pl-4 italic text-gray-600 my-6">
         {children}
       </blockquote>
     ),
