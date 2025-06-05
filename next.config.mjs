@@ -7,12 +7,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  images: {
 images: {
-  domains: ['images.ctfassets.net'], // or wherever your images are hosted
-  formats: ['image/avif', 'image/webp', 'image/png', 'image/jpg'],
+  domains: ['images.ctfassets.net'], 
 },
-  },
 
   async redirects() {
     return [

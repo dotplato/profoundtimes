@@ -27,8 +27,8 @@ export function Header() {
             <Image
               src="/ProfoundTimes.png"
               alt="Profound Times Logo"
-              width={30}
-              height={30}
+              width={200}
+              height={200}
               className="h-8 w-auto"
               priority
             />

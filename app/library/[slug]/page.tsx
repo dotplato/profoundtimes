@@ -68,7 +68,7 @@ const options = {
 }
   return (
     <div className="container mx-auto   py-8 max-w-5xl">
-      <Card className=" py-8 px-10">
+      <Card className=" py-8 px-10 bg-background/40 backdrop-blur">
       <article>
         <header className="mb-8">
          <h1 className="text-4xl font-bold tracking-tight mb-4">{article.fields.title}</h1>
