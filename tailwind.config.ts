@@ -10,6 +10,9 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+fontFamily: {
+        serif: ['Lora', 'serif'],
+      },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
