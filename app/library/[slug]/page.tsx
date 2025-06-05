@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation"
 import { getArticleBySlug } from "@/lib/contentful"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+
+import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import {
@@ -65,7 +67,8 @@ const options = {
   },
 }
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto   py-8 max-w-5xl">
+      <Card className=" py-8 px-10">
       <article>
         {/* Article Header */}
         <header className="mb-8">
@@ -117,6 +120,8 @@ const options = {
           </div>
         )}
       </article>
+</Card>
     </div>
+
   )
 }
