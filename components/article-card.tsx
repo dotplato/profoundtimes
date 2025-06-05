@@ -15,7 +15,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
     <Card className="flex flex-row hover:shadow-lg transition-shadow overflow-hidden h-full">
       <Link href={`/library/${article.fields.slug}`} className="flex w-full">
         {article.fields.featuredImage && (
-          <div className="relative min-w-[200px] w-[300px] h-auto">
+          <div className="relative min-w-[130px] w-[200px] h-auto">
             <Image
               src={`https:${article.fields.featuredImage.fields.file.url}`}
               alt={article.fields.featuredImage.fields.title || article.fields.title}
@@ -32,7 +32,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
             <p className="text-muted-foreground text-sm line-clamp-3">{article.fields.excerpt}</p>
           </CardHeader>
           <CardFooter className="p-0 pt-4">
-            <div className="flex items-center justify-between w-full text-xs text-muted-foreground">
+            <div className="flex  flex-wrap items-center justify-between w-full text-xs text-muted-foreground">
               <div className="flex items-center gap-1">
                 <User className="h-3 w-3" />
                 <span>{article.fields.author}</span>
