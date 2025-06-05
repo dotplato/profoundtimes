@@ -45,7 +45,7 @@ const options = {
       </blockquote>
     ),
     [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => (
-      <p className="text-lg leading-relaxed text-gray-800 mb-4">{children}</p>
+      <p className="text-lg leading-relaxed  mb-4">{children}</p>
     ),
     [BLOCKS.UL_LIST]: (node: any, children: React.ReactNode) => (
       <ul className="list-disc list-outside pl-6 space-y-2">{children}</ul>
@@ -98,7 +98,7 @@ const options = {
           </div>
         )}
 
-        <div className="prose prose-xl max-w-none">
+        <div className="prose prose-xl text-foreground-100 max-w-none">
 
 {documentToReactComponents(article.fields.content, options)}
         </div>
