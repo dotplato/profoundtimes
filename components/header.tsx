@@ -6,12 +6,12 @@ import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, BrickWall, Library, CircleDot} from "lucide-react"
 
 const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Library", href: "/library" },
-  { name: "Topics", href: "/topics" },
+  { name: "Home", href: "/", icon: BrickWall},
+  { name: "Library", href: "/library", icon: Library},
+  { name: "Topics", href: "/topics", icon: CircleDot},
 ]
 
 export function Header() {
@@ -34,21 +34,27 @@ export function Header() {
             />
           </Link>
 
+          {/* Desktop Nav */}
           <nav className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-6">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
-                  pathname === item.href ? "text-foreground" : "text-muted-foreground"
-                )}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map((item) => {
+              const Icon = item.icon
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary",
+                    pathname === item.href ? "text-foreground" : "text-muted-foreground"
+                  )}
+                >
+                  <Icon className="w-4 h-4" />
+                  {item.name}
+                </Link>
+              )
+            })}
           </nav>
 
+          {/* Mobile Toggle */}
           <button
             className="md:hidden p-2"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
@@ -58,21 +64,26 @@ export function Header() {
           </button>
         </div>
 
+        {/* Mobile Nav */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-2 space-y-2 bg-background border-t py-4 px-2">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  "block px-4 py-2 rounded text-sm font-medium transition-colors hover:bg-muted",
-                  pathname === item.href ? "text-foreground" : "text-muted-foreground"
-                )}
-                onClick={() => setIsMobileMenuOpen(false)} 
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map((item) => {
+              const Icon = item.icon
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-2 px-4 py-2 rounded text-sm font-medium transition-colors hover:bg-muted",
+                    pathname === item.href ? "text-foreground" : "text-muted-foreground"
+                  )}
+                  onClick={() => setIsMobileMenuOpen(false)} 
+                >
+                  <Icon className="w-4 h-4" />
+                  {item.name}
+                </Link>
+              )
+            })}
           </div>
         )}
       </div>
