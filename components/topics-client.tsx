@@ -1,5 +1,7 @@
 "use client"
 
+import { useTransition } from "react"
+import { BookLoader } from "@/components/book-loader" // adjust path if needed
 import { useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { ChevronDown, ChevronRight, X } from "lucide-react"
@@ -16,8 +18,10 @@ interface TopicsClientProps {
   selectedTopic?: string
 }
 
+
 export function TopicsClient({ categories, articles, selectedTopic }: TopicsClientProps) {
   const [expandedCategories, setExpandedCategories] = useState<string[]>([])
+  const [isPending, startTransition] = useTransition()
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -30,17 +34,33 @@ export function TopicsClient({ categories, articles, selectedTopic }: TopicsClie
   const handleTopicClick = (topicSlug: string) => {
     const params = new URLSearchParams(searchParams.toString())
     params.set("topic", topicSlug)
-    router.push(`/topics?${params.toString()}`)
+
+    startTransition(() => {
+      router.push(`/topics?${params.toString()}`)
+    })
   }
 
   const clearFilter = () => {
-    router.push("/topics")
+    startTransition(() => {
+      router.push("/topics")
+    })
   }
 
-  // Filter articles by selected topic
+  // Filter logic
   const filteredArticles = selectedTopic
-    ? articles.filter((article) => article.fields.topics?.some((topic) => topic.fields.slug === selectedTopic))
+    ? articles.filter((article) =>
+        article.fields.topics?.some((topic) => topic.fields.slug === selectedTopic),
+      )
     : []
+
+  // Show loader while loading
+  if (isPending) {
+    return (
+      <div className="flex justify-center py-12">
+        <BookLoader />
+      </div>
+    )
+  }
 
   if (selectedTopic) {
     const selectedTopicName = categories
@@ -136,3 +156,4 @@ export function TopicsClient({ categories, articles, selectedTopic }: TopicsClie
     </div>
   )
 }
+
