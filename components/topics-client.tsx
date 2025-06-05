@@ -70,15 +70,14 @@ export function TopicsClient({ categories, articles, selectedTopic }: TopicsClie
     return (
       <div>
         <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <h2 className="text-2xl font-bold">Articles for:</h2>
             <Badge variant="default" className="text-base px-3 py-1">
               {selectedTopicName}
             </Badge>
           </div>
-          <Button variant="outline" size="sm" onClick={clearFilter}>
-            <X className="h-4 w-4 mr-2" />
-            Clear Filter
+          <Button variant="outline" size="icon" onClick={clearFilter}>
+            <X className="h-5 w-5 " />
           </Button>
         </div>
 
@@ -136,10 +135,10 @@ export function TopicsClient({ categories, articles, selectedTopic }: TopicsClie
                     <Button
                       key={topic.sys.id}
                       variant="outline"
-                      className="justify-start h-auto p-3"
+                      className="justify-start h-auto p-3 overflow-hidden"
                       onClick={() => handleTopicClick(topic.fields.slug)}
                     >
-                      <div className="text-left">
+                      <div className="text-left text-wrap">
                         <div className="font-medium">{topic.fields.name}</div>
                         {topic.fields.description && (
                           <div className="text-xs text-muted-foreground mt-1">{topic.fields.description}</div>

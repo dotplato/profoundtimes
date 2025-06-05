@@ -7,7 +7,7 @@ import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
   title: "ProfoundTimes",
-  description: "Discover insightful articles and explore diverse topics",
+  description: "ProfoundTimes is the place where people write their minds and don't fear of consequences",
 }
 
 export default function RootLayout({
