@@ -46,14 +46,12 @@ export function TopicsClient({ categories, articles, selectedTopic }: TopicsClie
     })
   }
 
-  // Filter logic
   const filteredArticles = selectedTopic
     ? articles.filter((article) =>
         article.fields.topics?.some((topic) => topic.fields.slug === selectedTopic),
       )
     : []
 
-  // Show loader while loading
   if (isPending) {
     return (
       <div className="flex justify-center py-12">

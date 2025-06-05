@@ -70,7 +70,6 @@ const options = {
     <div className="container mx-auto   py-8 max-w-5xl">
       <Card className=" py-8 px-10">
       <article>
-        {/* Article Header */}
         <header className="mb-8">
          <h1 className="text-4xl font-bold tracking-tight mb-4">{article.fields.title}</h1>
           <p className="text-md text-muted-foreground mb-6">{article.fields.excerpt}</p>
@@ -87,7 +86,6 @@ const options = {
           </div>
         </header>
 
-        {/* Featured Image */}
         {article.fields.featuredImage && (
           <div className="mb-8">
             <Image
@@ -100,13 +98,11 @@ const options = {
           </div>
         )}
 
-        {/* Article Content */}
         <div className="prose prose-xl max-w-none">
 
 {documentToReactComponents(article.fields.content, options)}
         </div>
 
-        {/* Topics */}
         {article.fields.topics && article.fields.topics.length > 0 && (
           <div className="mt-8 pt-8 border-t">
             <h3 className="text-lg font-semibold mb-4">Topics</h3>

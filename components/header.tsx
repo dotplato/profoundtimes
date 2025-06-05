@@ -34,7 +34,6 @@ export function Header() {
             />
           </Link>
 
-          {/* Desktop Nav */}
           <nav className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-6">
             {navigation.map((item) => (
               <Link
@@ -50,7 +49,6 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Hamburger Button */}
           <button
             className="md:hidden p-2"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
@@ -60,7 +58,6 @@ export function Header() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-2 space-y-2 bg-background border-t py-4 px-2">
             {navigation.map((item) => (
@@ -71,7 +68,7 @@ export function Header() {
                   "block px-4 py-2 rounded text-sm font-medium transition-colors hover:bg-muted",
                   pathname === item.href ? "text-foreground" : "text-muted-foreground"
                 )}
-                onClick={() => setIsMobileMenuOpen(false)} // close menu on click
+                onClick={() => setIsMobileMenuOpen(false)} 
               >
                 {item.name}
               </Link>
