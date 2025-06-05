@@ -8,7 +8,10 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+images: {
+  domains: ['images.ctfassets.net'], // or wherever your images are hosted
+  formats: ['image/avif', 'image/webp', 'image/png', 'image/jpg'],
+},
   },
 
   async redirects() {
