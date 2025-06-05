@@ -13,7 +13,7 @@ interface ArticleCardProps {
 export function ArticleCard({ article }: ArticleCardProps) {
   return (
     <Card className="flex flex-row hover:shadow-lg transition-shadow overflow-hidden h-full">
-      <Link href={`/article/${article.fields.slug}`} className="flex w-full">
+      <Link href={`/library/${article.fields.slug}`} className="flex w-full">
         {article.fields.featuredImage && (
           <div className="relative min-w-[200px] w-[300px] h-auto">
             <Image
