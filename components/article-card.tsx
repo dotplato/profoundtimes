@@ -12,10 +12,10 @@ interface ArticleCardProps {
 
 export function ArticleCard({ article }: ArticleCardProps) {
   return (
-    <Card className="flex flex-row hover:shadow-lg transition-shadow overflow-hidden h-full">
+    <Card className="flex flex-row hover:shadow-lg min-h-36 lg:min-h-52 transition-shadow overflow-hidden h-full">
       <Link href={`/library/${article.fields.slug}`} className="flex w-full">
         {article.fields.featuredImage && (
-          <div className="relative min-w-[130px] w-[200px] h-auto">
+          <div className="relative min-w-[100px] lg:w-[200px] h-auto">
             <Image
               src={`https:${article.fields.featuredImage.fields.file.url}`}
               alt={article.fields.featuredImage.fields.title || article.fields.title}

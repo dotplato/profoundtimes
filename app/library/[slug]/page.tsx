@@ -168,7 +168,6 @@ export default async function ArticlePage({ params }: { params: { slug: string }
         </div>
       </div>
 
-      {/* ✅ Heading observer script runs on client */}
       <HeadingObserver />
     </div>
   )
