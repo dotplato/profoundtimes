@@ -8,29 +8,16 @@ import {
   BLOCKS,
   INLINES,
   MARKS,
-  Document,
 } from "@contentful/rich-text-types"
-import { useEffect, useState } from "react"
+import  HeadingObserver from "@/components/heading-observer" // ✅ Import here
 
-// Utility to generate unique IDs for headings
 const generateId = (text: string) =>
-  text
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "")
+  text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")
 
-export default async function ArticlePage({
-  params,
-}: {
-  params: { slug: string }
-}) {
+export default async function ArticlePage({ params }: { params: { slug: string } }) {
   const article = await getArticleBySlug(params.slug)
+  if (!article) notFound()
 
-  if (!article) {
-    notFound()
-  }
-
-  // Extract headings from content
   const headings: { id: string; text: string; level: string }[] = []
   const extractHeadings = (node: any) => {
     if (
@@ -39,15 +26,9 @@ export default async function ArticlePage({
       node.nodeType === BLOCKS.HEADING_3
     ) {
       const text = node.content[0]?.value || ""
-      headings.push({
-        id: generateId(text),
-        text,
-        level: node.nodeType,
-      })
+      headings.push({ id: generateId(text), text, level: node.nodeType })
     }
-    if (node.content) {
-      node.content.forEach(extractHeadings)
-    }
+    if (node.content) node.content.forEach(extractHeadings)
   }
   extractHeadings(article.fields.content)
 
@@ -105,7 +86,7 @@ export default async function ArticlePage({
     <div className="container mx-auto py-8 max-w-8xl">
       <div className="flex flex-col lg:flex-row lg:justify-around gap-8">
         <aside className="lg:max-w-52 text-sm ">
-          <nav className="sticky top-24 border-t  pt-6 hidden lg:block">
+          <nav className="sticky top-24 border-t pt-6 hidden lg:block">
             <ul className="space-y-2">
               {headings.map((heading) => (
                 <li
@@ -145,14 +126,11 @@ export default async function ArticlePage({
                   <span>{article.fields.author}</span>
                   <span>•</span>
                   <span>
-                    {new Date(article.fields.publishDate).toLocaleDateString(
-                      "en-GB",
-                      {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      }
-                    )}
+                    {new Date(article.fields.publishDate).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })}
                   </span>
                 </div>
               </header>
@@ -161,10 +139,7 @@ export default async function ArticlePage({
                 <div className="mb-8">
                   <Image
                     src={`https:${article.fields.featuredImage.fields.file.url}`}
-                    alt={
-                      article.fields.featuredImage.fields.title ||
-                      article.fields.title
-                    }
+                    alt={article.fields.featuredImage.fields.title || article.fields.title}
                     width={800}
                     height={400}
                     className="w-full h-64 md:h-96 object-cover rounded-lg"
@@ -193,35 +168,9 @@ export default async function ArticlePage({
         </div>
       </div>
 
-      {/* Client-side script for scroll highlighting */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            document.addEventListener('DOMContentLoaded', () => {
-              const headings = document.querySelectorAll('h1, h2, h3');
-              const navLinks = document.querySelectorAll('.side-nav-link');
-              
-              const observer = new IntersectionObserver(
-                (entries) => {
-                  entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                      navLinks.forEach((link) => {
-                        link.classList.remove('text-foreground-900', 'font-semibold');
-                        if (link.getAttribute('data-heading-id') === entry.target.id) {
-                          link.classList.add('text-foreground-900', 'font-semibold');
-                        }
-                      });
-                    }
-                  });
-                },
-                { rootMargin: '0% 0% -80% 0%' }
-              );
-
-              headings.forEach((heading) => observer.observe(heading));
-            });
-          `,
-        }}
-      />
+      {/* ✅ Heading observer script runs on client */}
+      <HeadingObserver />
     </div>
   )
 }
+
