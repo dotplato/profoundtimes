@@ -4,6 +4,7 @@ import { BannerSlider} from "@/components/BannerSlider"
 import { ArticleCard } from "@/components/article-card"
 import { CategoryCard } from "@/components/category-card"
 import { Button } from "@/components/ui/button"
+import { Separator} from "@/components/ui/separator"
 import Link from "next/link"
 
 export default async function HomePage() {
@@ -17,6 +18,8 @@ export default async function HomePage() {
       {/* Hero Section */}
       <BannerSlider/>
       {/* Library Section */}
+
+<Separator className="mb-4"></Separator>
       <section className="mb-16">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-4xl font-bold">Library</h2>
@@ -33,8 +36,7 @@ export default async function HomePage() {
     <Link href="/library">Read More</Link>
   </Button>
 </div>      </section>
-
-      {/* Categories Section */}
+<Separator className="mb-4"></Separator>
       <section>
         <h2 className="text-4xl font-bold mb-8">Curated Topics</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
