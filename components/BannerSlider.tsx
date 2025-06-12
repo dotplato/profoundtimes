@@ -10,17 +10,17 @@ import Link from "next/link"
 
 const banners = [
   {
-    image: "/banner1.png",
+    image: "/banner1.jpg",
     title: "Explore Fresh Ideas",
     href: "/library",
   },
   {
-    image: "/banner2.png",
+    image: "/banner2.jpg",
     title: "Learn Something New Today",
     href: "/library",
   },
   {
-    image: "/banner3.png",
+    image: "/banner3.jpg",
     title: "Your Curated Reading Spot",
     href: "/library",
   },
