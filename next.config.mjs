@@ -7,11 +7,16 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-images: {
-  domains: ['images.ctfassets.net'], 
-},
-
-  async redirects() {
+ images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },  async redirects() {
     return [
       {
         source: '/time-poverty-in-a-fast-world-reclaiming-life-through-the-slow-movement',
