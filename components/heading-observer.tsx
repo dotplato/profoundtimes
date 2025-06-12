@@ -1,21 +1,27 @@
 
 "use client"
 
-import { useRef, useState } from "react"
+import { useEffect, useState } from "react"
+import { ArrowRight } from "lucide-react"
 import clsx from "clsx"
 
-import {ArrowRight} from "lucide-react"
 export default function HeadingObserver() {
-  const navRef = useRef<HTMLDivElement>(null)
+  const [headings, setHeadings] = useState<{ id: string; text: string }[]>([])
   const [currentId, setCurrentId] = useState<string | null>(null)
   const [isOpen, setIsOpen] = useState(false)
 
-  function initObserver(container: HTMLDivElement | null) {
-    if (!container || container.dataset.initialized === "true") return
-    container.dataset.initialized = "true"
+  useEffect(() => {
+    const headingElements = Array.from(document.querySelectorAll("h1, h2, h3")).filter(
+      (el) => el.id
+    ) as HTMLElement[]
 
-    const headings = document.querySelectorAll("h1, h2, h3")
-    const navLinks = container.querySelectorAll(".side-nav-link")
+    const headingData = headingElements.map((el) => ({
+      id: el.id,
+      text: el.textContent || "",
+    }))
+    setHeadings(headingData)
+
+    const navLinks = document.querySelectorAll(".side-nav-link")
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -23,6 +29,7 @@ export default function HeadingObserver() {
           if (entry.isIntersecting) {
             const id = entry.target.id
             setCurrentId(id)
+
             navLinks.forEach((link) => {
               link.classList.remove("text-foreground-900", "font-semibold")
               if (link.getAttribute("data-heading-id") === id) {
@@ -35,35 +42,24 @@ export default function HeadingObserver() {
       { rootMargin: "0% 0% -80% 0%" }
     )
 
-    headings.forEach((heading) => observer.observe(heading))
-  }
+    headingElements.forEach((heading) => observer.observe(heading))
 
-  // Create the floating nav (visible only on small screens)
-  const headings = Array.from(document.querySelectorAll("h1, h2, h3")).map((el) => ({
-    id: el.id,
-    text: el.textContent || "",
-  }))
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <div
-      ref={(ref) => {
-        navRef.current = ref
-        initObserver(ref)
-      }}
-      className="fixed bottom-4 left-4 right-4 z-50 block md:lg:hidden"
-    >
+    <div className="fixed bottom-4 left-4 right-4 z-50 sm:lg:hidden">
       <div className="relative">
+        <button
+          onClick={() => setIsOpen((prev) => !prev)}
+          className="relative w-full px-4 py-2 bg-background/40 backdrop-blur border border-border rounded-full shadow"
+        >
+          {headings.find((h) => h.id === currentId)?.text || "Jump to Section"}
+          <ArrowRight className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+        </button>
 
-<button
-  onClick={() => setIsOpen((prev) => !prev)}
-  className="relative w-full px-4 py-2 bg-background/40 backdrop-blur border border-border rounded-full shadow"
->
-  {headings.find((h) => h.id === currentId)?.text || "Jump to Section"}
-
-  <ArrowRight className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-</button>
-       {isOpen && (
-          <div className="absolute bottom-full mb-2 w-full max-h-64 overflow-y-auto bg-background border border-border rounded-lg shadow">
+        {isOpen && (
+          <div className="absolute bottom-full mb-2 w-full max-h-64 overflow-y-auto bg-background border border-border rounded-xl shadow">
             {headings.map((heading) => (
               <a
                 key={heading.id}
@@ -75,7 +71,8 @@ export default function HeadingObserver() {
                 )}
                 onClick={() => setIsOpen(false)}
               >
-                {heading.text}               </a>
+                {heading.text}
+              </a>
             ))}
           </div>
         )}
