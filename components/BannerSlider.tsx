@@ -29,7 +29,7 @@ const banners = [
 export function BannerSlider() {
   return (
     <>
-      <div className="mb-16 rounded-xl overflow-hidden">
+      <div className="mb-16 rounded-xl overflow-hidden drop-shadow-lg">
         <Swiper
           modules={[Autoplay, Pagination]}
           loop
