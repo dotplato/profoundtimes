@@ -16,7 +16,7 @@ const banners = [
   },
   {
     image: "/banner2.jpg",
-    title: "Learn Something New Today",
+    title: "Learn Something New ",
     href: "/library",
   },
   {
